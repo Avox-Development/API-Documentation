@@ -1,9 +1,6 @@
+
 # Förslag på 90gQopen Public API
-Här är ett förslag på hur ni kan göra om erat public API för att innehålla en hel del mer information och lite mer möjligheter för användarna att få anpassad information.
-
-Allt är skrivet som en dokumentation, men det gör det förhoppningsvis enkelt att följa. Om ni väljer att acceptera förslaget får ni gärna, om ni vill, använda dokumentationen (som ett template) till en officiell version.
-
-Det är uppdelat i fem olika endpoints, där man kan få information om spelare, guilds, en hel del olika topplistor (UHC med olika säsonger osv) och parkours men mera.
+Här är ett förslag på hur ni kan göra om erat public API för att innehålla en hel del mer information och lite mer möjligheter för användarna att få anpassad information. Allt är skrivet som en dokumentation vilket förhoppningsvis gör det enkelt att följa.
 
 ---
 
@@ -34,7 +31,7 @@ Det är uppdelat i fem olika endpoints, där man kan få information om spelare,
 - `parkourservern_whitelist` (*boolean*) Om spelaren är vitlistad på parkourservern eller inte.
 - `muted` (*boolean*) Om spelaren är mutad eller inte.
 - `banned` (*boolean*) Om spelaren är bannlyst eller inte.
-- `survival` (*object*) 
+- `survival` (*object*, syns endast om `survival` parametern är true.)
     - `money` (*int*) Hur mycket pengar spelaren har.
     - `experience` (*int*) Mängden XP som spelaren har.
     - `level` (*int*) Vilken level spelaren är på.
@@ -44,17 +41,17 @@ Det är uppdelat i fem olika endpoints, där man kan få information om spelare,
     - `warp_slots` (*int*) Hur många upplåsta warp-slotter spelaren har.
     - `quests_completed` (*int*) Antalet quests som spelaren har slutfört.
     - `quest_streak` (*int*) Spelarens nuvarande quest streak.
-- `creative` (*object*) 
+- `creative` (*object*, syns endast om `creative` parametern är true.)
     - `rank` (*string*) Vilken creative rank spelaren har.
     - `plot_claims` (*int*) Hur många plotter spelaren har claimat.
     - `plot_claims_max` (*int*) Maxantalet plotter spelaren kan claima.
-- `mb` (*object*) 
+- `mb` (*object*, syns endast om `mb` parametern är true.)
     - `games_played` (*int*) Antalet spelade spel i Musical Blocks.
     - `winstreak` (*int*) Spelarens nuvarande winstreak i Musical Blocks.
     - `best_winstreak` (*int*) Spelarens bästa winstreak i Musical Blocks.
     - `points` (*int*) Spelarens poäng i Musical Blocks.
     - `hat` (*string*) Vilken hatt spelaren har valt i Musical Blocks.
-- `uhc` (*object*) 
+- `uhc` (*object*, syns endast om `uhc` parametern är true.)
     - `season_games_played` (*int*) Antalet spelade spel i Ultra Hardcore under denna säsong.
     - `season_points` (*int*) Spelarens poäng i Ultra Hardcore under denna säsong.
     - `season_wins` (*int*) Antalet vinster i Ultra Hardcore under denna säsong.
@@ -65,7 +62,7 @@ Det är uppdelat i fem olika endpoints, där man kan få information om spelare,
     - `alltime_wins` (*int*) Antalet vinster i Ultra Hardcore under all time.
     - `alltime_kills` (*int*) Antalet dödade spelare i Ultra Hardcore under all time.
     - `alltime_deaths` (*int*) Antalet gånger spelaren har dött i Ultra Hardcore under all time.
-- `event` (*object*) 
+- `event` (*object*, syns endast om `event` parametern är true.)
     - `event_wins` (*int*) Antalet vinster i event.
     - `gold` (*int*) Mängden guld eventuellt belönad.
     - `gold_earned` (*int*) Totalt förtjänad guld i event.
@@ -340,7 +337,7 @@ https://90gqopen.se/api/user/?username=Fy17
 - `level` (*int*) Vilken level guilden är på.
 - `plot_claims` (*int*) Antalet plotter som guilden har claimat.
 - `plot_claims_max` (*int*) Maxantalet plotter som guilden kan claima.
-- `memberlist` (*array*)
+- `memberlist` (*array*, syns endast om `memberlist` parametern är true.)
   - *En lista på medlemmarna i guilden, samt vilken rank de har. Uppbyggnad: `["SPELARE", "owner|moderator|member"]`.*
 
 ### API Exempel:
@@ -560,6 +557,30 @@ Ger tillbaka en lista med namnen på alla olika parkours.
 ["Adventure", "Akromatiskt", "Alperna", "Among Us", "Antarktis", "AquamanCity", "Arbetsplatsen", "Asien", "Atlantis", "Avalon", "Backen", "Bambuskogen", "Berget", "Bergsbyn", "Bergsgrottan", "Bergsslingan", "Bergstemplet", "Bikupan", "Biomeklippan", "Biomes", "Björkbergen", "Bjorkskogen", "Blomsterlandet", "Bondgården", "Brandstationen", "Brasilien", "Byn", "Candy Crush", "Creepern", "Cyberpunk", "Dalen", "Demo", "Dimensions", "Djungelbyn", "Djungelgrottan", "Djungelklippan", "Djungeln", "DjungelnsMysterium", "Djungeltemplet", "Dödsberget", "Drömmarnas Land", "Egypten", "Endstaden", "Fängelset", "Fantasibyn", "Fantasihuset", "Fantasilandet", "Fantasiträdet", "Fantasy", "Färgglatt", "Floden", "Första Äventyret", "Fossil", "Framtiden", "Fruktlandet", "Gamla Grottan", "Gamla Parken", "Gamla Spökskogen", "Gamla Svampen", "Gamla Texas", "Grekland", "Grönsakslandet", "Grottan", "Grottorna", "Guldgruvan", "Hålet", "Halloween", "Hamnen", "Havet", "Havstormen", "Himlen", "Huset", "Hyddorna", "IKEA", "Indiana Jones", "Innerstaden", "Isberget", "Isgrottan", "Iskallt", "Iskall Dröm", "Isslottet", "Istemplet", "Istiden", "Italien", "Japan", "Jungleruinen", "Kina", "Klaustrofobi", "Klippbyn", "Klipporna", "Klippstemplet", "Kloakerna", "Klocktornet", "Korallrevet", "Korallriket", "Kristallgrottan", "Kvarteret", "Lavariket", "Lerigt", "Luftöarna", "Lunar", "LushCave", "Mansion", "Mardröm", "Mars", "Matrix", "Medelhavsbyn", "Medeltiden", "Medletidsberget", "Mesa", "Meteoritfall", "Mexico", "Mobilspel", "MolnetsTempel", "Mot Toppen", "Mumindalen", "Naturen", "Nether", "Netherhuset", "Netherslottet", "Niagarafallet", "Öarna", "Ödemarken", "Övergivet", "Palatset", "Paradiset", "Parken", "Påskdalen", "Pepparkakslandet", "Poseidons Tempel", "PrisonEscape", "Promenaden", "Pumpalandet", "Purpur", "Radioaktiv", "Ravinen", "Regnskogen", "Retro", "Rithill", "RödaÖknen", "Rörigt", "Ruggiga Grottan", "Ruinerna", "Rust", "Rymden", "Sagobergen", "Sagolandet", "Sanddalen", "Sandgrottorna", "Säsong", "Sjukhuset", "Sjumilaskogen", "Skidbacken", "Skogarna", "Skogen", "Skolan", "Skyblock", "Slottet", "Slutet", "Smurfbyn", "Snöbergen", "Sonic", "Spanien", "Spegelvänd", "Spindelnästet", "Spökhuset", "Spökskogen", "Staden", "Stenigt", "Stjärnhoppet", "Stormen", "Super Mario", "Svampen", "Svampgrottorna", "Svårighetsgrader", "Svartvitt", "Sydpolen", "Tekniska Problem", "Templerna", "Tetris", "Texas", "The Blaze", "The Cave", "The End", "The Mine", "Torget", "Tornet", "Träbyn", "Trädgården", "Trädkojan", "Träskdalen", "Träsket", "Tropica", "Underjorden", "Under Ytan", "Uppvärmning", "Utah", "Världsgrottorna", "Vattentemplet", "Vilda Västern", "Vildmarken", "Vinter", "Vinterstaden", "Vulkanen"]
 ```
 
+## API Endpoint: Total
+`https://90gqopen.se/api/total/?type={type}`
+
+**Metod:** `GET`
+| Parameter | Type | Beskrivning |
+| :--: | :--: | :-- |
+| type (*required*)| String | Vad du vill få totalen av.
+
+Denna endpoint ger tillbaka det totala av någonting på servern i form av en siffra (*int*), till exempel så ger `player_money` tillbaka den totala summan pengar inne på survival (hos spelarna, guilds har sin egen).
+
+### Lista på types:
+```
+gqmynt player_money guild_money guild_exp guild_level survival_exp level quests_completed quest_streak mb_games_played mb_points uhc_games_played uhc_points uhc_wins uhc_kills uhc_deaths event_wins gold gold_earned mvps anvil_games_played anvil_wins anvil_gold_earned border_runners_games_played border_runners_wins border_runners_gold_earned border_runners_rounds_survived border_runners_powerups_used border_runners_most_rounds_survived dragons_games_played dragons_wins dragons_gold_earned dragons_arrows_shot dragons_arrows_hit dragons_leaps_used infection_games_played infection_wins infection_gold_earned infection_alpha_games infection_infected_kills infection_survivor_kills infection_most_kills_infected infection_most_kills_survivor maze_games_played maze_wins maze_gold_earned oitc_games_played oitc_wins oitc_gold_earned oitc_melee_kills oitc_ranged_kills oitc_deaths oitc_arrows_shot oitc_highest_kill_streak oitc_longest_bow_kill parkour_games_played parkour_wins parkour_gold_earned parkour_rounds_survived parkour_most_rounds_survived red_rover_games_played red_rover_wins red_rover_gold_earned red_rover_killer_games red_rover_rounds_survived red_rover_kills red_rover_dashes red_rover_most_rounds_survived snow_fight_games_played snow_fight_wins snow_fight_gold_earned snow_fight_kills snow_fight_snowballs_thrown snow_fight_snowballs_hit spleef_games_played spleef_wins spleef_gold_earned spleef_blocks_broken spleef_snowballs_thrown spleef_most_blocks_broken sumo_games_played sumo_wins sumo_gold_earned sumo_kills sumo_most_kills sg_games_played sg_wins sg_gold_earned sg_kills sg_deaths sg_chests_looted sg_most_kills tnt_run_games_played tnt_run_wins tnt_run_gold_earned tnt_run_walked_over_blocks tnt_run_leaps_used tnt_run_most_blocks_broken
+```
+
+### API Exempel:
+##### Request:
+```
+https://90gqopen.se/api/total/?type=player_money
+```
+##### Response:
+```json
+12123123123
+```
 ---
 
 ## Error Koder:
