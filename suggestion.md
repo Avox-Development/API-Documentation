@@ -1,6 +1,6 @@
 
 # Förslag på 90gQopen Public API
-Här är ett förslag på hur ni kan göra om erat public API för att innehålla en hel del mer information och lite mer möjligheter för användarna att få anpassad information. Allt är skrivet som en dokumentation vilket förhoppningsvis gör det enkelt att följa.
+Här är ett förslag på hur ni kan göra om erat public API för att innehålla en hel del mer information och lite mer möjligheter för användarna att få anpassad information. Allt är skrivet som en dokumentation vilket förhoppningsvis gör det enkelt att följa. :)
 
 ---
 
@@ -41,6 +41,11 @@ Här är ett förslag på hur ni kan göra om erat public API för att innehåll
     - `warp_slots` (*int*) Hur många upplåsta warp-slotter spelaren har.
     - `quests_completed` (*int*) Antalet quests som spelaren har slutfört.
     - `quest_streak` (*int*) Spelarens nuvarande quest streak.
+    - `crystals_placed` (*int*) Antal end crystals som spelaren har placerat ut (endast de som bidrar till draken räknas)
+    - `dragons_participated` (*int*) Antalet drakar som spelaren har varit med och gjort skada på.
+    - `dragon_damage` (*int*) Hur mycket skada som spelaren har gjort totalt på drakar. (HP)
+    - `elytras_collected` (*int*) Hur många elytror som spelaren har fått utav drakar.
+    - `dragon_eggs_colllected` (*int*) Hur många dragon eggs som spelaren har fått utav drakar.
 - `creative` (*object*, syns endast om `creative` parametern är true.)
     - `rank` (*string*) Vilken creative rank spelaren har.
     - `plot_claims` (*int*) Hur många plotter spelaren har claimat.
@@ -153,17 +158,17 @@ Här är ett förslag på hur ni kan göra om erat public API för att innehåll
 ### API Exempel:
 ##### Request:
 ```
-https://90gqopen.se/api/user/?username=Fy17&survival=true&creative=true&mb=true&uhc=true&event=true
+https://90gqopen.se/api/user/?username=Skopis&survival=true&creative=true&mb=true&uhc=true&event=true
 ```
 ##### Response:
 ```json
 {
-	"id": 17518,
-	"uuid": "d284d134-51e7-42da-90db-c28826aaf8a9",
-	"username": "Fy17",
-	"rank": "bashlang",
-	"gQmynt": 180,
-	"onlinetime": 3530858733,
+	"id": 11807,
+	"uuid": "13c8258d-4061-4ccf-8794-2d1cc7653d9b",
+	"username": "Skopis",
+	"rank": "moderator",
+	"gQmynt": 81,
+	"onlinetime": 6074607520,
 	"last_online": "2024-04-09 20:32:12",
 	"last_server": "parkour",
 	"friend_count": 21,
@@ -172,14 +177,19 @@ https://90gqopen.se/api/user/?username=Fy17&survival=true&creative=true&mb=true&
 	"banned": false,
 	"survival": {
 		"money": 10011,
-		"experience": 4850,
+		"experience": 3914,
 		"level": 19,
 		"plot_claims": 12
 		"plot_claims_max": 19,
-		"guild": "Avox",
+		"guild": "ABC",
 		"warp_slots": 1,
 		"quests_completed": 188,
 		"quest_streak": 3
+		"crystals_placed": 8231,
+		"dragons_participated": 932,
+		"dragon_damage": 1800,
+		"elytras_collected": 14,
+		"dragon_eggs_collected": 0
 	},
 	"creative": {
 		"rank": "apprentice",
@@ -297,18 +307,18 @@ https://90gqopen.se/api/user/?username=Fy17&survival=true&creative=true&mb=true&
 ```
 ##### Request:
 ```
-https://90gqopen.se/api/user/?username=Fy17
+https://90gqopen.se/api/user/?username=1ssh
 ```
 
 ##### Response:
 ```json
 {
-	"id": 17518,
-	"uuid": "d284d134-51e7-42da-90db-c28826aaf8a9",
-	"username": "Fy17",
-	"rank": "bashlang",
-	"gQmynt": 180,
-	"onlinetime": 3530858733,
+	"id": 9910,
+	"uuid": "df533f63-c589-41f2-b205-5b127698a241",
+	"username": "1ssh",
+	"rank": "admin",
+	"gQmynt": 101,
+	"onlinetime": 14093982029,
 	"last_online": "2024-04-09 20:32:12",
 	"last_server": "parkour",
 	"friend_count": 21,
@@ -407,7 +417,7 @@ https://90gqopen.se/api/guild/?name=Avox
 - De är alla sorterade så att den första ligger 1:a på topplistan, och så vidare.
 #### Lista på alla sorter:
 ```
-onlinetime gqmynt survival_money guild_money guild_members guild_exp guild_level survival_exp level quests_completed quest_streak mb_games_played mb_winstreak mb_best_winstreak mb_points uhc_games_played uhc_points uhc_wins uhc_kills uhc_deaths event_wins gold gold_earned mvps anvil_games_played anvil_wins anvil_gold_earned border_runners_games_played border_runners_wins border_runners_gold_earned border_runners_rounds_survived border_runners_powerups_used border_runners_most_rounds_survived dragons_games_played dragons_wins dragons_gold_earned dragons_arrows_shot dragons_arrows_hit dragons_leaps_used infection_games_played infection_wins infection_gold_earned infection_alpha_games infection_infected_kills infection_survivor_kills infection_most_kills_infected infection_most_kills_survivor maze_games_played maze_wins maze_gold_earned oitc_games_played oitc_wins oitc_gold_earned oitc_melee_kills oitc_ranged_kills oitc_deaths oitc_arrows_shot oitc_highest_kill_streak oitc_longest_bow_kill parkour_games_played parkour_wins parkour_gold_earned parkour_rounds_survived parkour_most_rounds_survived red_rover_games_played red_rover_wins red_rover_gold_earned red_rover_killer_games red_rover_rounds_survived red_rover_kills red_rover_dashes red_rover_most_rounds_survived snow_fight_games_played snow_fight_wins snow_fight_gold_earned snow_fight_kills snow_fight_snowballs_thrown snow_fight_snowballs_hit spleef_games_played spleef_wins spleef_gold_earned spleef_blocks_broken spleef_snowballs_thrown spleef_most_blocks_broken sumo_games_played sumo_wins sumo_gold_earned sumo_kills sumo_most_kills sg_games_played sg_wins sg_gold_earned sg_kills sg_deaths sg_chests_looted sg_most_kills tnt_run_games_played tnt_run_wins tnt_run_gold_earned tnt_run_walked_over_blocks tnt_run_leaps_used tnt_run_most_blocks_broken
+onlinetime gqmynt survival_money guild_money guild_members guild_exp guild_level survival_exp level quests_completed quest_streak crystals_placed dragons_participated dragon_damage elytras_collected dragon_eggs_collected mb_games_played mb_winstreak mb_best_winstreak mb_points uhc_games_played uhc_points uhc_wins uhc_kills uhc_deaths event_wins gold gold_earned mvps anvil_games_played anvil_wins anvil_gold_earned border_runners_games_played border_runners_wins border_runners_gold_earned border_runners_rounds_survived border_runners_powerups_used border_runners_most_rounds_survived dragons_games_played dragons_wins dragons_gold_earned dragons_arrows_shot dragons_arrows_hit dragons_leaps_used infection_games_played infection_wins infection_gold_earned infection_alpha_games infection_infected_kills infection_survivor_kills infection_most_kills_infected infection_most_kills_survivor maze_games_played maze_wins maze_gold_earned oitc_games_played oitc_wins oitc_gold_earned oitc_melee_kills oitc_ranged_kills oitc_deaths oitc_arrows_shot oitc_highest_kill_streak oitc_longest_bow_kill parkour_games_played parkour_wins parkour_gold_earned parkour_rounds_survived parkour_most_rounds_survived red_rover_games_played red_rover_wins red_rover_gold_earned red_rover_killer_games red_rover_rounds_survived red_rover_kills red_rover_dashes red_rover_most_rounds_survived snow_fight_games_played snow_fight_wins snow_fight_gold_earned snow_fight_kills snow_fight_snowballs_thrown snow_fight_snowballs_hit spleef_games_played spleef_wins spleef_gold_earned spleef_blocks_broken spleef_snowballs_thrown spleef_most_blocks_broken sumo_games_played sumo_wins sumo_gold_earned sumo_kills sumo_most_kills sg_games_played sg_wins sg_gold_earned sg_kills sg_deaths sg_chests_looted sg_most_kills tnt_run_games_played tnt_run_wins tnt_run_gold_earned tnt_run_walked_over_blocks tnt_run_leaps_used tnt_run_most_blocks_broken
 ```
 ==Notera: Parkour-topplistor har sin egen endpoint!==
 
@@ -569,7 +579,7 @@ Denna endpoint ger tillbaka det totala av någonting på servern i form av en si
 
 ### Lista på types:
 ```
-gqmynt player_money guild_money guild_exp guild_level survival_exp level quests_completed quest_streak mb_games_played mb_points uhc_games_played uhc_points uhc_wins uhc_kills uhc_deaths event_wins gold gold_earned mvps anvil_games_played anvil_wins anvil_gold_earned border_runners_games_played border_runners_wins border_runners_gold_earned border_runners_rounds_survived border_runners_powerups_used border_runners_most_rounds_survived dragons_games_played dragons_wins dragons_gold_earned dragons_arrows_shot dragons_arrows_hit dragons_leaps_used infection_games_played infection_wins infection_gold_earned infection_alpha_games infection_infected_kills infection_survivor_kills infection_most_kills_infected infection_most_kills_survivor maze_games_played maze_wins maze_gold_earned oitc_games_played oitc_wins oitc_gold_earned oitc_melee_kills oitc_ranged_kills oitc_deaths oitc_arrows_shot oitc_highest_kill_streak oitc_longest_bow_kill parkour_games_played parkour_wins parkour_gold_earned parkour_rounds_survived parkour_most_rounds_survived red_rover_games_played red_rover_wins red_rover_gold_earned red_rover_killer_games red_rover_rounds_survived red_rover_kills red_rover_dashes red_rover_most_rounds_survived snow_fight_games_played snow_fight_wins snow_fight_gold_earned snow_fight_kills snow_fight_snowballs_thrown snow_fight_snowballs_hit spleef_games_played spleef_wins spleef_gold_earned spleef_blocks_broken spleef_snowballs_thrown spleef_most_blocks_broken sumo_games_played sumo_wins sumo_gold_earned sumo_kills sumo_most_kills sg_games_played sg_wins sg_gold_earned sg_kills sg_deaths sg_chests_looted sg_most_kills tnt_run_games_played tnt_run_wins tnt_run_gold_earned tnt_run_walked_over_blocks tnt_run_leaps_used tnt_run_most_blocks_broken
+gqmynt player_money guild_money guild_exp guild_level survival_exp level quests_completed quest_streak crystals_placed dragons_participated dragon_damage elytras_collected dragon_eggs_collected mb_games_played mb_points uhc_games_played uhc_points uhc_wins uhc_kills uhc_deaths event_wins gold gold_earned mvps anvil_games_played anvil_wins anvil_gold_earned border_runners_games_played border_runners_wins border_runners_gold_earned border_runners_rounds_survived border_runners_powerups_used border_runners_most_rounds_survived dragons_games_played dragons_wins dragons_gold_earned dragons_arrows_shot dragons_arrows_hit dragons_leaps_used infection_games_played infection_wins infection_gold_earned infection_alpha_games infection_infected_kills infection_survivor_kills infection_most_kills_infected infection_most_kills_survivor maze_games_played maze_wins maze_gold_earned oitc_games_played oitc_wins oitc_gold_earned oitc_melee_kills oitc_ranged_kills oitc_deaths oitc_arrows_shot oitc_highest_kill_streak oitc_longest_bow_kill parkour_games_played parkour_wins parkour_gold_earned parkour_rounds_survived parkour_most_rounds_survived red_rover_games_played red_rover_wins red_rover_gold_earned red_rover_killer_games red_rover_rounds_survived red_rover_kills red_rover_dashes red_rover_most_rounds_survived snow_fight_games_played snow_fight_wins snow_fight_gold_earned snow_fight_kills snow_fight_snowballs_thrown snow_fight_snowballs_hit spleef_games_played spleef_wins spleef_gold_earned spleef_blocks_broken spleef_snowballs_thrown spleef_most_blocks_broken sumo_games_played sumo_wins sumo_gold_earned sumo_kills sumo_most_kills sg_games_played sg_wins sg_gold_earned sg_kills sg_deaths sg_chests_looted sg_most_kills tnt_run_games_played tnt_run_wins tnt_run_gold_earned tnt_run_walked_over_blocks tnt_run_leaps_used tnt_run_most_blocks_broken
 ```
 
 ### API Exempel:
